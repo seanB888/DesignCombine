@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "question": "How man course are there?",
+    "answer": "We release and average of 10 courses per calendar year."
+  },
+  {
+    "id": 2,
+    "question": "How can I cancel my plan?",
+    "answer": "You can cancel your plan at anytime. Log into your account and scroll to the bottom of the first tab."
+  },
+  {
+    "id": 3,
+    "question": "Can I down load the content?",
+    "answer": "Yes, all the course and there content can be downloaded."
+  },
+  {
+    "id": 4,
+    "question": "Do I get a certificate?",
+    "answer": "Yes, at the completion of everycourse, you will be provided with a link to download your certificate."
+  }
+]
