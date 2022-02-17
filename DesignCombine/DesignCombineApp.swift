@@ -10,7 +10,7 @@ import Firebase
 
 @main
 struct DesignCombineApp: App {
-//    @UIApplicationDelegateAdapter(AppDelegate.self) var appDelegate
+    @UIApplicationDelegateAdaptor private var appDelegate: AppDelegate
 
     var body: some Scene {
         WindowGroup {
@@ -24,7 +24,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions:
-    [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
         FirebaseApp.configure()
         return true
     }
