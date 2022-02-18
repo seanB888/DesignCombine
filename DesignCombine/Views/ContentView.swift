@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct ContentView: View {
+    @Environment(\.colorScheme) var colorScheme: ColorScheme
     @State private var contentOffset = CGFloat(0)
+    @State private var showCertificates: Bool = false
 
     var body: some View {
         NavigationView {
@@ -17,8 +19,13 @@ struct ContentView: View {
                     contentOffset = offsetPoint.y
                 }) {
                     content
+                        .sheet(isPresented: $showCertificates, content: {
+                            CertificatesView()
+                        })
                 }
 
+                // Creats a blur effect on the status bar when scrolled 16
+                // pixels to the bottom
                 VisualEffectBlur(blurStyle: .systemMaterial)
                     .opacity(contentOffset < -16 ? 1 : 0)
                     .animation(.easeIn)
@@ -30,7 +37,7 @@ struct ContentView: View {
             .navigationBarHidden(true)
         }
         .navigationViewStyle(StackNavigationViewStyle())
-        // .accentColor(colorScheme == .dark ? .white : Color(red: 0.2196078449, green: 0.007843137719, blue: 0.8549019694))
+         .accentColor(colorScheme == .dark ? .white : Color(red: 0.2196078449, green: 0.007843137719, blue: 0.8549019694))
     }
 
     // menu view
@@ -38,6 +45,9 @@ struct ContentView: View {
         VStack {
             // profile Row
             ProfileRow()
+                .onTapGesture {
+                    showCertificates.toggle()
+                }
 
             // menu Row
             VStack {
@@ -46,7 +56,7 @@ struct ContentView: View {
                 }
                 divider
                 NavigationLink(destination: PackagesView()) {
-                    MenuRow(title: "Swift Package", leftIcon: "square.stack.3d.up.fill")
+                    MenuRow(title: "SwiftUI Package", leftIcon: "square.stack.3d.up.fill")
                 }
                 divider
                 Link(destination: URL(string: "https://www.youtube.com/channel/UCTIhf0opxukTIRkbXJ3kN-g")!, label: {
@@ -84,41 +94,6 @@ private struct ScrollOffsetPrefernceKey: PreferenceKey {
     static var defaultValue: CGPoint = .zero
 
     static func reduce(value: inout CGPoint, nextValue: () -> CGPoint) {}
-}
-
-// TrackableScrollView
-struct TrackableScrollView<Content: View>: View {
-
-    let axes: Axis.Set
-    let offsetChangeed: (CGPoint) -> Void
-    let content: Content
-
-    init(
-        axes: Axis.Set = .vertical,
-        offsetChanged: @escaping (CGPoint) -> Void = { _ in },
-        @ViewBuilder content: () -> Content
-    ) {
-        self.axes = axes
-        self.offsetChangeed = offsetChanged
-        self.content = content()
-    }
-
-    var body: some View {
-        SwiftUI.ScrollView(axes) {
-            GeometryReader { geometry in
-                Color.clear.preference(
-                    key: ScrollOffsetPrefernceKey.self,
-                    value: geometry.frame(in: .named("scrollView")).origin
-                )
-            }
-            .frame(width: 0, height: 0)
-
-            content
-        }
-        .coordinateSpace(name: "scrollView")
-        .onPreferenceChange(ScrollOffsetPrefernceKey.self, perform: offsetChangeed
-        )
-    }
 }
 
 struct ContentView_Previews: PreviewProvider {

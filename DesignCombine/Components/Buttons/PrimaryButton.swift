@@ -12,10 +12,10 @@ struct PrimaryButton: View {
     var text: String = "Contact Support"
 
     var body: some View {
-        if colorScheme == .dark {
-            darkModeButton
-        } else {
+        if colorScheme == .light {
             lightModeButton
+        } else {
+            darkModeButton
         }
     }
 
@@ -64,8 +64,7 @@ struct PrimaryButton: View {
                 )
                 .cornerRadius(16)
                 .overlay(
-                    RoundedRectangle(cornerRadius: 16).stroke(Color.white, lineWidth: 1).blendMode(.overlay)
-                )
+                    RoundedRectangle(cornerRadius: 16).stroke(Color.white, lineWidth: 1).blendMode(.overlay))
         }
         .frame(height: 50)
     }
@@ -74,6 +73,7 @@ struct PrimaryButton: View {
 
 struct PrimaryButton_Previews: PreviewProvider {
     static var previews: some View {
+        PrimaryButton()
         PrimaryButton()
             .preferredColorScheme(.dark)
 

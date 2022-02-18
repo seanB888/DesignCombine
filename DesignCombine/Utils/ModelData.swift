@@ -8,7 +8,7 @@
 import Foundation
 
 // fetching the data from faq.json
-var faqData: [FAQ] = load("faq.json")
+var faqData: [FAQ] = load("faqData.json")
 
 func load<T: Decodable>(_ filename: String) -> T {
     let data: Data

@@ -34,6 +34,7 @@ final class CertificateViewModel: ObservableObject {
                         let logo = data["logo"] as? String ?? ""
                         let instructor = data["instructor"] as? String ?? ""
 
+                        // The instance of certificate
                         let certificate = Certificate(id: id, course: course, date: date, logo: logo, instruction: instructor)
 
                         self.certificates.append(certificate)

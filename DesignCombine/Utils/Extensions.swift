@@ -25,7 +25,7 @@ extension View {
         self
             .padding(16)
             .background(Color("Background 1"))
-            .background(
+            .background( 
                 VisualEffectBlur(blurStyle: .systemUltraThinMaterialDark)
             )
             .overlay(
