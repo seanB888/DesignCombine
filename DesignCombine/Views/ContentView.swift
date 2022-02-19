@@ -49,6 +49,17 @@ struct ContentView: View {
                     showCertificates.toggle()
                 }
 
+            // notification Row
+            VStack {
+                NotificationsRow()
+
+                divider
+
+                LiteModeRow()
+            }
+            .blurBackground()
+            .padding(.top, 20)
+
             // menu Row
             VStack {
                 NavigationLink(destination: FAQView()) {
